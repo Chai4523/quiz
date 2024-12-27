@@ -2,6 +2,7 @@ html, body, main {
     margin: 0;
     font-family: "Lato", serif;
     height: 100%;
+    background-color: #4F4557;
 }
 
 .header {
@@ -20,8 +21,7 @@ html, body, main {
     align-items: stretch;
 
     color: #FFE0B5;
-    background-color: #4F4557;
-    height: calc(100% - 62.4px);
+    padding-bottom: 60px;
 }
 
 .nav-col {
@@ -119,13 +119,14 @@ html, body, main {
     justify-content: space-between;
 }
 
-.next-btn {
+.btn {
     cursor: pointer;
-    align-self: flex-end;
-    border: 1px solid #F4EEE0;
-    border-radius: 5px;
-    padding: 12px 30px;
-    margin-top: 20px;
     color: #FFF2D7;
     background-color: #393646;
+    border: 1px solid #F4EEE0;
+    border-radius: 5px;
+    
+    padding: 12px 30px;
+    margin-top: 20px;
+    margin-left: 10px;
 }
