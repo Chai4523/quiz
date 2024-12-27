@@ -1,0 +1,131 @@
+html, body, main {
+    margin: 0;
+    font-family: "Lato", serif;
+    height: 100%;
+}
+
+.header {
+    color: #FFF2D7;
+    background-color: #393646;
+    padding: 12px 24px;
+}
+
+.header > h1 {
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    color: #FFE0B5;
+    background-color: #4F4557;
+    height: calc(100% - 62.4px);
+}
+
+.nav-col {
+    flex-grow: 3;
+    max-width: 20%;
+}
+
+.nav-col > ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-col li a {
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: #FFE0B5;
+}
+
+.nav-col li a:hover {
+    background-color: #6D5D6E;
+}
+
+.nav-col .active-nav {
+    font-weight: bold;
+    color: #FFF2D7;
+    background-color: #6D5D6E;
+}
+
+.qna-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 7;
+
+    padding: 0 40px;
+}
+
+.qna-header {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    column-gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    padding-right: 12px;
+    border-radius: 5px;
+
+    color: #393646;
+    background-color: #F8C794;
+}
+
+.quiz-container > pre {
+    border: 1px solid #D8AE7E;
+    padding: 10px 20px;
+}
+
+.answer-container {
+    
+}
+
+.quiz-option input {
+    display: none;
+}
+
+.quiz-option {
+    margin-bottom: 10px;
+}
+
+.quiz-option > label {
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    width: 100%;
+    
+    border: 1px solid #F4EEE080;
+    border-radius: 6px;
+}
+
+.quiz-option > label:hover {
+    border: 1px solid #F4EEE0;
+    border-radius: 6px;
+}
+
+.quiz-option > input:checked ~ label {
+    border: 2px solid #F4EEE0;
+    border-radius: 6px;
+}
+
+.qna-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.next-btn {
+    cursor: pointer;
+    align-self: flex-end;
+    border: 1px solid #F4EEE0;
+    border-radius: 5px;
+    padding: 12px 30px;
+    margin-top: 20px;
+    color: #FFF2D7;
+    background-color: #393646;
+}
