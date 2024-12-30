@@ -1,45 +1,85 @@
-let quizCategory = "javascript"
-const prevBtn = document.getElementById("prev-btn")
-const nextBtn = document.getElementById("next-btn")
-const submitBtn = document.getElementById("submit-btn")
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const submitBtn = document.getElementById("submit-btn");
 
-const getQuestion = () => {
-    const categoryQuestions = questions.find(cat => cat.category.toLowerCase() === quizCategory.toLowerCase()).questions || []
+function getQuestion(quizCategory) {
+  const categoryQuestions =
+    questions.find(
+      (cat) => cat.category.toLowerCase() === quizCategory.toLowerCase()
+    ).questions || [];
 
-    return categoryQuestions
+  return categoryQuestions;
 }
 
-function renderQuestion(index) {
-    const questionList = getQuestion()
-    const currentQuestion = questionList[index]
-    const formAns = document.getElementById("form-answer")
-    if (!questionList) return
-    formAns.replaceChildren()
+function renderQuestion(q) {
+  const formAns = document.getElementById("form-answer");
+  formAns.replaceChildren();
 
-    console.log(questionList)
-    document.getElementById("question").textContent = currentQuestion.question
-    document.getElementById("snippet").textContent = currentQuestion.snippet
-    currentQuestion.options.forEach((option, index) => {
-        const optionContainer = document.createElement("div")
-        optionContainer.className = "quiz-option"
+  document.getElementById("question").textContent = q.question;
+  document.getElementById("snippet").textContent = q.snippet;
+  q.options.forEach((option, index) => {
+    const optionContainer = document.createElement("div");
+    optionContainer.className = "quiz-option";
 
-        const input = document.createElement("input")
-        input.type = "radio"
-        input.id = `option${index}`
-        input.name = "options"
-        input.value = option
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.id = `option${index}`;
+    input.name = "options";
+    input.value = option;
 
-        const label = document.createElement("label")
-        label.setAttribute("for", `option${index}`)
-        label.textContent = option
-        optionContainer.appendChild(input)
-        optionContainer.appendChild(label)
-        formAns.appendChild(optionContainer)
-    });
-
+    const label = document.createElement("label");
+    label.setAttribute("for", `option${index}`);
+    label.textContent = option;
+    optionContainer.appendChild(input);
+    optionContainer.appendChild(label);
+    formAns.appendChild(optionContainer);
+  });
 }
 
-renderQuestion(0)
+function navigateQuestion(index, questionList) {
+  const listLen = questionList.length;
+  document.getElementById("question-id").textContent = index + 1;
 
-prevBtn.addEventListener("click", () => renderQuestion(0))
-nextBtn.addEventListener("click", () => renderQuestion(1))
+  if (index < 0 || index >= listLen) return;
+
+  if (index === 0) {
+    prevBtn.style.display = "none";
+    submitBtn.style.display = "none";
+    nextBtn.style.display = "inline-block";
+  } else {
+    prevBtn.style.display = "inline-block";
+    nextBtn.style.display = "inline-block";
+    submitBtn.style.display = "none";
+    if (index === listLen - 1) {
+      nextBtn.style.display = "none";
+      submitBtn.style.display = "inline-block";
+    }
+  }
+  renderQuestion(questionList[index]);
+}
+
+function renderQNA() {
+  let quizCategory = "javascript";
+  let index = 0;
+  const questionList = getQuestion(quizCategory);
+  const currentQuestion = questionList[index];
+  prevBtn.style.display = "none";
+  submitBtn.style.display = "none";
+  document.getElementById("question-id").textContent = index + 1;
+
+  console.log(questionList);
+
+  renderQuestion(currentQuestion);
+
+  nextBtn.addEventListener("click", () => {
+    navigateQuestion(index + 1, questionList);
+    index += 1;
+  });
+
+  prevBtn.addEventListener("click", () => {
+    navigateQuestion(index - 1, questionList);
+    index -= 1;
+  });
+}
+
+renderQNA();
