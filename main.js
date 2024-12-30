@@ -66,6 +66,7 @@ function renderQNA() {
   prevBtn.style.display = "none";
   submitBtn.style.display = "none";
   document.getElementById("question-id").textContent = index + 1;
+  document.getElementById("question-size").textContent = questionList.length;
 
   console.log(questionList);
 
