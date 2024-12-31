@@ -1,132 +1,188 @@
-html, body, main {
-    margin: 0;
-    font-family: "Lato", serif;
-    height: 100%;
-    background-color: #4F4557;
+html,
+body,
+main {
+  margin: 0;
+  font-family: "Lato", serif;
+  height: 100%;
+  background-color: #4f4557;
 }
 
 .header {
-    color: #FFF2D7;
-    background-color: #393646;
-    padding: 12px 24px;
+  color: #fff2d7;
+  background-color: #393646;
+  padding: 12px 24px;
 }
 
 .header > h1 {
-    margin: 0;
+  margin: 0;
 }
 
 .content {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 
-    color: #FFE0B5;
-    padding-bottom: 60px;
+  color: #ffe0b5;
+  padding-bottom: 60px;
 }
 
 .nav-col {
-    flex-grow: 3;
-    max-width: 20%;
+  flex-grow: 3;
+  max-width: 20%;
 }
 
 .nav-col > ol {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-col li a {
-    display: block;
-    text-decoration: none;
-    padding: 20px;
-    color: #FFE0B5;
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #ffe0b5;
 }
 
 .nav-col li a:hover {
-    background-color: #6D5D6E;
+  background-color: #6d5d6e;
 }
 
 .nav-col .active-nav {
-    font-weight: bold;
-    color: #FFF2D7;
-    background-color: #6D5D6E;
+  font-weight: bold;
+  color: #fff2d7;
+  background-color: #6d5d6e;
 }
 
 .qna-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 7;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 7;
 
-    padding: 0 40px;
+  padding: 0 40px;
 }
 
 .qna-header {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    column-gap: 10px;
-    margin-top: 20px;
-    padding: 10px;
-    padding-right: 12px;
-    border-radius: 5px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  padding-right: 12px;
+  border-radius: 5px;
 
-    color: #393646;
-    background-color: #F8C794;
+  color: #393646;
+  background-color: #f8c794;
 }
 
 .quiz-container > pre {
-    border: 1px solid #D8AE7E;
-    padding: 10px 20px;
+  border: 1px solid #d8ae7e;
+  padding: 10px 20px;
 }
 
 .answer-container {
-    
 }
 
 .quiz-option input {
-    display: none;
+  display: none;
 }
 
 .quiz-option {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .quiz-option > label {
-    cursor: pointer;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 15px 20px;
-    width: 100%;
-    
-    border: 1px solid #F4EEE080;
-    border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  width: 100%;
+
+  border: 1px solid #f4eee080;
+  border-radius: 6px;
 }
 
 .quiz-option > label:hover {
-    border: 1px solid #F4EEE0;
-    border-radius: 6px;
+  border: 1px solid #f4eee0;
+  border-radius: 6px;
 }
 
 .quiz-option > input:checked ~ label {
-    border: 2px solid #F4EEE0;
-    border-radius: 6px;
+  border: 2px solid #f4eee0;
+  border-radius: 6px;
+}
+
+.quiz-option input:disabled + label:hover {
+  cursor: auto;
+  border: 1px solid #f4eee080;
+  border-radius: 6px;
+}
+
+.quiz-option input:checked:disabled + label:hover {
+  border: 2px solid #f4eee0;
+  border-radius: 6px;
+}
+
+.correct-option {
+  border: 2px solid lime !important;
+}
+
+.incorrect-option {
+  border: 2px solid red !important;
 }
 
 .qna-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .btn {
-    cursor: pointer;
-    color: #FFF2D7;
-    background-color: #393646;
-    border: 1px solid #F4EEE0;
-    border-radius: 5px;
-    
-    padding: 12px 30px;
-    margin-top: 20px;
-    margin-left: 10px;
+  cursor: pointer;
+  color: #fff2d7;
+  background-color: #393646;
+  border: 1px solid #f4eee0;
+  border-radius: 5px;
+
+  padding: 12px 30px;
+  margin-top: 20px;
+  margin-left: 10px;
 }
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 7;
+  align-items: center;
+
+  padding: 0 40px;
+}
+
+/* .half-circle-container {
+    height: 160px;
+    width: 400px;
+    background-color: white;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.half-circle-progress {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    background-color: orange;
+    border-radius: 50% 50% 0 0;
+    margin: -125px;
+}
+
+.half-circle-progress:before {
+    position: absolute;
+    height: 840%;
+    width: 84%;
+    background-color: red;
+    border-radius: 50% 50% 0 0;
+} */

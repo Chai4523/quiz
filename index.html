@@ -34,7 +34,7 @@
           </ol>
         </nav>
 
-        <div class="qna-container">
+        <div id="qna-container" class="qna-container">
           <div class="qna-header">
             <span class="material-symbols-outlined"> timer </span>
             <span>60: 00</span>
@@ -58,6 +58,21 @@
               <button class="btn" id="next-btn">Next</button>
               <button class="btn" id="submit-btn">Submit</button>
             </div>
+          </div>
+        </div>
+
+        <div id="score-container" class="score-container">
+          <h2>Total Score</h2>
+          <h1 id="score">5</h1>
+          <!-- <div class="half-circle-container">
+            <div class="half-circle-progress">
+              <div class="value-container"></div>
+            </div>
+          </div> -->
+          <p>out of <span id="score-total">5</span></p>
+          <div>
+            <button id="btn-review" class="btn">Review</button>
+            <button id="btn-reset" class="btn">Try Again</button>
           </div>
         </div>
       </div>
