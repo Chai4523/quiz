@@ -52,24 +52,36 @@ function renderQuestion(q, qIndex) {
   }
 
   if (status === "complete") {
-    let options = document.querySelector("#form-answer").options
+    const options = document.querySelector("#form-answer").options
+    const verdictContainerEl = document.getElementById("explaination-container")
+    const verdictEl = document.getElementById("verdict")
+    const explainationEl = document.getElementById("explaination")
 
     options.forEach((option, index) => {
       if (option.checked) {
         if (index === q.answer) {
+          verdictEl.textContent = "Correct Answer"
+          verdictEl.style.color = "lime"
           option.label.classList.add("correct-option")
         } else {
+          verdictEl.textContent = "Wrong Answer"
+          verdictEl.style.color = "red"
           option.label.classList.add("incorrect-option")
         }
       }
 
       if (index === q.answer && !option.classList.contains("correct-option")) {
         if (answers[qIndex] === null) {
+          verdictEl.textContent = "Wrong Answer"
+          verdictEl.style.color = "red"
           option.label.classList.add("incorrect-option")
         } else {
           option.label.classList.add("correct-option")
         }
       }
+
+      verdictContainerEl.style.display = "block"
+      explainationEl.textContent = q.explaination
       option.disabled = true
     })
   }
@@ -126,6 +138,7 @@ function renderQNA() {
   const currentQuestion = questionList[index];
   const scoreScreen = document.getElementById("score-container")
   const qnaScreen = document.getElementById("qna-container")
+  const verdictContainerEl = document.getElementById("explaination-container")
   let answers = new Array(questionList.length).fill(null);
   sessionStorage.setItem("answer", JSON.stringify(answers));
   sessionStorage.setItem("status", "ongoing");
@@ -133,6 +146,7 @@ function renderQNA() {
   
   timerEl.style.display = "flex"
   scoreScreen.style.display = "none"
+  verdictContainerEl.style.display = "none"
   prevBtn.style.display = "none";
   nextBtn.style.display = "inline-block";
   submitBtn.style.display = "none";
