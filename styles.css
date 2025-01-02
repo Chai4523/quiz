@@ -64,10 +64,15 @@ main {
 
 .qna-header {
   display: flex;
-  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.timer {
+  display: flex;
   align-items: center;
   column-gap: 10px;
-  margin-top: 20px;
   padding: 10px;
   padding-right: 12px;
   border-radius: 5px;
@@ -135,8 +140,8 @@ main {
 .qna-footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
+  margin-top: 30px;
 }
 
 .btn {
@@ -147,7 +152,6 @@ main {
   border-radius: 5px;
 
   padding: 12px 30px;
-  margin-top: 20px;
   margin-left: 10px;
 }
 

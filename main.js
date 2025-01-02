@@ -1,7 +1,9 @@
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-const submitBtn = document.getElementById("submit-btn");
+const timerEl = document.getElementById("timer")
+const prevBtn = document.getElementById("btn-prev");
+const nextBtn = document.getElementById("btn-next");
+const submitBtn = document.getElementById("btn-submit");
 const reviewBtn = document.getElementById("btn-review");
+const scoreBtn = document.getElementById("btn-score");
 const resetBtn = document.getElementById("btn-reset");
 
 function getQuestion(quizCategory) {
@@ -96,6 +98,8 @@ function navigateQuestion(index, questionList) {
 
   if (status === "complete") {
     submitBtn.style.display = "none"
+    timerEl.style.display = "none"
+    scoreBtn.style.display = "inline-block"
   }
   renderQuestion(questionList[index], index);
 }
@@ -123,14 +127,16 @@ function renderQNA() {
   const scoreScreen = document.getElementById("score-container")
   const qnaScreen = document.getElementById("qna-container")
   let answers = new Array(questionList.length).fill(null);
-  scoreScreen.style.display = "none"
   sessionStorage.setItem("answer", JSON.stringify(answers));
   sessionStorage.setItem("status", "ongoing");
-
-
+  
+  
+  timerEl.style.display = "flex"
+  scoreScreen.style.display = "none"
   prevBtn.style.display = "none";
   nextBtn.style.display = "inline-block";
   submitBtn.style.display = "none";
+  scoreBtn.style.display = "none";
   document.getElementById("question-id").textContent = index + 1;
   document.getElementById("question-size").textContent = questionList.length;
 
@@ -164,7 +170,12 @@ function renderQNA() {
   resetBtn.addEventListener("click", () => {
     qnaScreen.style.display = "flex"
     renderQNA()
-  })  
+  })
+
+  scoreBtn.addEventListener("click", () => {
+    scoreScreen.style.display = "flex"
+    qnaScreen.style.display = "none"
+  })
 }
 
 renderQNA();
