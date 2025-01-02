@@ -1,3 +1,4 @@
+let timer = null
 const timerEl = document.getElementById("timer")
 const prevBtn = document.getElementById("btn-prev");
 const nextBtn = document.getElementById("btn-next");
@@ -13,6 +14,31 @@ function getQuestion(quizCategory) {
     ).questions || [];
 
   return categoryQuestions;
+}
+
+function startTimer(callBackFn) {
+  const minEl = document.getElementById("minute")
+  const secEl = document.getElementById("second")
+  let minute = 5
+  let seconds = 0
+  const timeLimit = (minute * 60) + seconds
+  let currentTime = timeLimit
+  minEl.textContent = minute.toString()
+  secEl.textContent = seconds.toString().length > 1 ? seconds.toString() : "0".concat(seconds.toString())
+
+  clearInterval(timer)
+  timer = setInterval(() => {
+    currentTime--
+    seconds = currentTime % 60
+    minEl.textContent = Math.floor(currentTime/60).toString()
+    secEl.textContent = seconds.toString().length > 1 ? seconds.toString() : "0".concat(seconds.toString())
+
+    if (currentTime <= 0) {
+      clearInterval(timer)
+      sessionStorage.setItem("status", "expired");
+      callBackFn()
+    }
+  }, 1000)
 }
 
 function renderQuestion(q, qIndex) {
@@ -49,6 +75,14 @@ function renderQuestion(q, qIndex) {
 
   if (answers[qIndex] != null) {
     document.getElementById(`option${answers[qIndex]}`).checked = true;
+  }
+
+  if (status === "expired") {
+    const options = document.querySelector("#form-answer").options
+
+    options.forEach((option, index) => {
+      option.disabled = true
+    })
   }
 
   if (status === "complete") {
@@ -120,6 +154,7 @@ function submitAnswer(questionList) {
   let ansList = JSON.parse(sessionStorage.getItem("answer"));
   let score = 0
 
+  clearInterval(timer)
   sessionStorage.setItem("status", "complete");
   questionList.forEach((question, index) => {
     if (ansList[index] != null && ansList[index] === question.answer) {
@@ -157,6 +192,7 @@ function renderQNA() {
   console.log(questionList);
 
   renderQuestion(currentQuestion, index);
+  startTimer(() => {renderQuestion(currentQuestion, index)})
 
   nextBtn.addEventListener("click", () => {
     navigateQuestion(index + 1, questionList);
