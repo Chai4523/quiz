@@ -53,6 +53,36 @@ main {
   background-color: #6d5d6e;
 }
 
+#landing-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  row-gap: 50px;
+
+  padding: 0 40px;
+}
+
+#landing-container h1 {
+  margin-bottom: 0;
+}
+
+.landing-desc {
+  max-width: 600px;
+}
+
+.landing-desc ul{
+  margin: 40px 0;
+}
+
+.landing-desc li{
+  margin-bottom: 10px;
+}
+
+#btn-start {
+  align-self: flex-end;
+}
+
 .qna-container {
   display: flex;
   flex-direction: column;

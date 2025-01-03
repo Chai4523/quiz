@@ -1,11 +1,10 @@
-let timer = null
-const timerEl = document.getElementById("timer")
-const prevBtn = document.getElementById("btn-prev");
-const nextBtn = document.getElementById("btn-next");
-const submitBtn = document.getElementById("btn-submit");
-const reviewBtn = document.getElementById("btn-review");
-const scoreBtn = document.getElementById("btn-score");
-const resetBtn = document.getElementById("btn-reset");
+const App = {
+  timer: null
+}
+
+function capitalizeFirstLetter(val) {
+  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+} 
 
 function getQuestion(quizCategory) {
   const categoryQuestions =
@@ -23,18 +22,19 @@ function startTimer(callBackFn) {
   let seconds = 0
   const timeLimit = (minute * 60) + seconds
   let currentTime = timeLimit
+  
   minEl.textContent = minute.toString()
   secEl.textContent = seconds.toString().length > 1 ? seconds.toString() : "0".concat(seconds.toString())
 
-  clearInterval(timer)
-  timer = setInterval(() => {
+  clearInterval(App.timer)
+  App.timer = setInterval(() => {
     currentTime--
     seconds = currentTime % 60
     minEl.textContent = Math.floor(currentTime/60).toString()
     secEl.textContent = seconds.toString().length > 1 ? seconds.toString() : "0".concat(seconds.toString())
 
     if (currentTime <= 0) {
-      clearInterval(timer)
+      clearInterval(App.timer)
       sessionStorage.setItem("status", "expired");
       callBackFn()
     }
@@ -123,6 +123,11 @@ function renderQuestion(q, qIndex) {
 
 function navigateQuestion(index, questionList) {
   const listLen = questionList.length;
+  const timerEl = document.getElementById("timer")
+  const prevBtn = document.getElementById("btn-prev");
+  const nextBtn = document.getElementById("btn-next");
+  const submitBtn = document.getElementById("btn-submit");
+  const scoreBtn = document.getElementById("btn-score");
   let status = sessionStorage.getItem("status")
   document.getElementById("question-id").textContent = index + 1;
 
@@ -154,7 +159,7 @@ function submitAnswer(questionList) {
   let ansList = JSON.parse(sessionStorage.getItem("answer"));
   let score = 0
 
-  clearInterval(timer)
+  clearInterval(App.timer)
   sessionStorage.setItem("status", "complete");
   questionList.forEach((question, index) => {
     if (ansList[index] != null && ansList[index] === question.answer) {
@@ -166,20 +171,30 @@ function submitAnswer(questionList) {
   document.getElementById("score-total").textContent = questionList.length
 }
 
-function renderQNA() {
-  let quizCategory = "javascript";
-  let index = 0;
-  const questionList = getQuestion(quizCategory);
-  const currentQuestion = questionList[index];
+function renderQNA(quizCategory) {
+  const timerEl = document.getElementById("timer")
+  const landingScreen = document.getElementById("landing-container")
   const scoreScreen = document.getElementById("score-container")
   const qnaScreen = document.getElementById("qna-container")
   const verdictContainerEl = document.getElementById("explaination-container")
+  const prevBtn = document.getElementById("btn-prev");
+  const nextBtn = document.getElementById("btn-next");
+  const submitBtn = document.getElementById("btn-submit");
+  const scoreBtn = document.getElementById("btn-score");
+  const resetBtn = document.getElementById("btn-reset");
+  const reviewBtn = document.getElementById("btn-review");
+
+  let index = 0;
+  const questionList = getQuestion(quizCategory);
+  const currentQuestion = questionList[index];
   let answers = new Array(questionList.length).fill(null);
   sessionStorage.setItem("answer", JSON.stringify(answers));
   sessionStorage.setItem("status", "ongoing");
   
   
   timerEl.style.display = "flex"
+  qnaScreen.style.display = "flex"
+  landingScreen.style.display = "none"
   scoreScreen.style.display = "none"
   verdictContainerEl.style.display = "none"
   prevBtn.style.display = "none";
@@ -192,7 +207,7 @@ function renderQNA() {
   console.log(questionList);
 
   renderQuestion(currentQuestion, index);
-  startTimer(() => {renderQuestion(currentQuestion, index)})
+  startTimer(() => {renderQuestion(questionList[index], index)})
 
   nextBtn.addEventListener("click", () => {
     navigateQuestion(index + 1, questionList);
@@ -219,7 +234,7 @@ function renderQNA() {
 
   resetBtn.addEventListener("click", () => {
     qnaScreen.style.display = "flex"
-    renderQNA()
+    renderQNA(quizCategory)
   })
 
   scoreBtn.addEventListener("click", () => {
@@ -228,4 +243,27 @@ function renderQNA() {
   })
 }
 
-renderQNA();
+function main() {
+  const landingScreen = document.getElementById("landing-container")
+  const qnaScreen = document.getElementById("qna-container")
+  const scoreScreen = document.getElementById("score-container")
+  const startBtn = document.getElementById("btn-start");
+  const categoryEl = document.getElementById("test-category")
+  const sizeEl = document.getElementById("test-size")
+  const timeEl = document.getElementById("test-time")
+
+  let quizCategory = "javascript";
+
+  qnaScreen.style.display = "none"
+  scoreScreen.style.display = "none"
+  landingScreen.style.display = "flex"
+  categoryEl.textContent = capitalizeFirstLetter(quizCategory)
+  sizeEl.textContent = getQuestion(quizCategory).length
+  timeEl.textContent = getQuestion(quizCategory).length.toString().concat(" minutes")
+  
+  startBtn.addEventListener("click", () => {
+    renderQNA(quizCategory);
+  })
+}
+
+main();
