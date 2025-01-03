@@ -7,12 +7,11 @@ function capitalizeFirstLetter(val) {
 } 
 
 function getQuestion(quizCategory) {
-  const categoryQuestions =
-    questions.find(
-      (cat) => cat.category.toLowerCase() === quizCategory.toLowerCase()
-    ).questions || [];
+  const categoryQuestions = questions.find(
+    (cat) => cat.category.toLowerCase() === quizCategory.toLowerCase()
+  )?.questions;
 
-  return categoryQuestions;
+  return categoryQuestions ?? [];
 }
 
 function startTimer(callBackFn) {
@@ -251,6 +250,7 @@ function main() {
   const categoryEl = document.getElementById("test-category")
   const sizeEl = document.getElementById("test-size")
   const timeEl = document.getElementById("test-time")
+  const navItems = document.querySelectorAll(".nav-item")
 
   let quizCategory = "javascript";
 
@@ -260,6 +260,23 @@ function main() {
   categoryEl.textContent = capitalizeFirstLetter(quizCategory)
   sizeEl.textContent = getQuestion(quizCategory).length
   timeEl.textContent = getQuestion(quizCategory).length.toString().concat(" minutes")
+
+  navItems.forEach(item => {
+    item.addEventListener("click", () => {
+      navItems.forEach(navItem => {
+        navItem.classList.remove("nav-active")
+      })
+      item.classList.add("nav-active")
+
+      qnaScreen.style.display = "none"
+      scoreScreen.style.display = "none"
+      landingScreen.style.display = "flex"
+      quizCategory = item.textContent.toLowerCase()
+      categoryEl.textContent = item.textContent
+      sizeEl.textContent = getQuestion(quizCategory).length
+      timeEl.textContent = getQuestion(quizCategory).length.toString().concat(" minutes")
+    })
+  })
   
   startBtn.addEventListener("click", () => {
     renderQNA(quizCategory);

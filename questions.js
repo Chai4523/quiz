@@ -92,4 +92,51 @@ example(0, 1, 2);`,
       },
     ],
   },
+  {
+    category: "react",
+    questions: [
+      {
+        question: "What will be the output of the following code snippet?",
+        snippet: `print(typeof(NaN));`,
+        options: ["Object", "Number", "String", "None of the above"],
+        answer: 0,
+        explaination:
+          "NaN in Javascript is defined to be of type number despite its name(not a number).",
+      },
+      {
+        question: "What will be the output of the following code snippet?",
+        snippet: `print(typeof(NaN));`,
+        options: ["Object", "Number", "String", "None of the above"],
+        answer: 0,
+        explaination:
+          "NaN in Javascript is defined to be of type number despite its name(not a number).",
+      },
+    ]
+  },
+  {
+    category: "html",
+    questions: [
+      {
+        question: "What will be the output of the following code snippet?",
+        snippet: `print(typeof(NaN));`,
+        options: ["Object", "Number", "String", "None of the above"],
+        answer: 0,
+        explaination:
+          "NaN in Javascript is defined to be of type number despite its name(not a number).",
+      },
+    ]
+  },
+  {
+    category: "css",
+    questions: [
+      {
+        question: "What will be the output of the following code snippet?",
+        snippet: `print(typeof(NaN));`,
+        options: ["Object", "Number", "String", "None of the above"],
+        answer: 0,
+        explaination:
+          "NaN in Javascript is defined to be of type number despite its name(not a number).",
+      },
+    ]
+  }
 ];
