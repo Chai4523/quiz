@@ -28,6 +28,7 @@ main {
 
 .nav-col {
   flex: 0 0 20%;
+  max-width: 200px;
 }
 
 .nav-col > ol {
@@ -84,7 +85,7 @@ main {
 }
 
 #btn-start {
-  align-self: flex-end;
+  align-self: center;
 }
 
 .qna-container {

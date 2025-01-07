@@ -1,5 +1,6 @@
 const App = {
-  timer: null
+  timer: null,
+  questionList: null
 }
 
 function capitalizeFirstLetter(val) {
@@ -170,7 +171,7 @@ function submitAnswer(questionList) {
   document.getElementById("score-total").textContent = questionList.length
 }
 
-function renderQNA(quizCategory) {
+function renderQNA() {
   const timerEl = document.getElementById("timer")
   const landingScreen = document.getElementById("landing-container")
   const scoreScreen = document.getElementById("score-container")
@@ -184,7 +185,7 @@ function renderQNA(quizCategory) {
   const reviewBtn = document.getElementById("btn-review");
 
   let index = 0;
-  const questionList = getQuestion(quizCategory);
+  const questionList = App.questionList;
   const currentQuestion = questionList[index];
   let answers = new Array(questionList.length).fill(null);
   sessionStorage.setItem("answer", JSON.stringify(answers));
@@ -233,7 +234,7 @@ function renderQNA(quizCategory) {
 
   resetBtn.addEventListener("click", () => {
     qnaScreen.style.display = "flex"
-    renderQNA(quizCategory)
+    renderQNA()
   })
 
   scoreBtn.addEventListener("click", () => {
@@ -258,8 +259,9 @@ function main() {
   scoreScreen.style.display = "none"
   landingScreen.style.display = "flex"
   categoryEl.textContent = capitalizeFirstLetter(quizCategory)
-  sizeEl.textContent = getQuestion(quizCategory).length
-  timeEl.textContent = getQuestion(quizCategory).length.toString().concat(" minutes")
+  App.questionList = getQuestion(quizCategory)
+  sizeEl.textContent = App.questionList.length
+  timeEl.textContent = App.questionList.length.toString().concat(" minutes")
 
   navItems.forEach(item => {
     item.addEventListener("click", () => {
@@ -272,9 +274,10 @@ function main() {
       scoreScreen.style.display = "none"
       landingScreen.style.display = "flex"
       quizCategory = item.textContent.toLowerCase()
+      App.questionList = getQuestion(quizCategory)
       categoryEl.textContent = item.textContent
-      sizeEl.textContent = getQuestion(quizCategory).length
-      timeEl.textContent = getQuestion(quizCategory).length.toString().concat(" minutes")
+      sizeEl.textContent = App.questionList.length
+      timeEl.textContent = App.questionList.length.toString().concat(" minutes")
     })
   })
   
