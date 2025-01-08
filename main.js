@@ -18,7 +18,7 @@ function getQuestion(quizCategory) {
 function startTimer(callBackFn) {
   const minEl = document.getElementById("minute")
   const secEl = document.getElementById("second")
-  let minute = 5
+  let minute = App.questionList.length
   let seconds = 0
   const timeLimit = (minute * 60) + seconds
   let currentTime = timeLimit
@@ -48,7 +48,12 @@ function renderQuestion(q, qIndex) {
   formAns.replaceChildren();
 
   document.getElementById("question").textContent = q.question;
-  document.getElementById("snippet").textContent = q.snippet;
+  if (q.snippet) {
+    document.getElementById("snippet").style.display = "block";
+    document.getElementById("snippet").textContent = q.snippet;
+  } else {
+    document.getElementById("snippet").style.display = "none";
+  }
 
   q.options.forEach((option, index) => {
     const optionContainer = document.createElement("div");
